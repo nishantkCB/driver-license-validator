@@ -24,7 +24,7 @@ export function validate(dl: string, states?: string | string[]) {
     }
 
     info.forEach(item => {
-      if (item.regex.test(dl)) {
+      if (new RegExp(item.regex, 'i').test(dl)) {
         results.push({
           description: item.description,
           state
@@ -34,10 +34,6 @@ export function validate(dl: string, states?: string | string[]) {
   });
 
   return results.length ? results : null;
-}
-
-export function validateIgnoreCase(dl: string, states?: string | string[]) {
-  validate(dl.toUpperCase(), states);
 }
 
 export const dlStates: CountryFormats = US_DL;
